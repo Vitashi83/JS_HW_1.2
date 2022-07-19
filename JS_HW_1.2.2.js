@@ -66,19 +66,22 @@ const basket = [
     },
 ];
 
+//Полная чистка корзины
 function basket_clear() {
     // basket.length = 0;
     basket.splice(0);
     return basket;
 }
 
-function basket_add() {
-    basket.push({goodId: 2, amount: 3});
+//Добавление товара в корзину
+function basket_add (a, b) {
+    basket.push({'goodId': a, 'amount': b});
     return basket;
 }
 
-function basket_clear1() {
-    basket.splice(0, 1);
+//Удаление одной позиции из корзины
+function basket_clear1(n) {
+    basket.splice(n);
     return basket;
 }
 
@@ -96,7 +99,7 @@ console.log(basket);
 // console.log(basket_sum);
 
 
-console.log(basket_add());
-console.log(basket_clear1());
+console.log(basket_add(5, 4));
+console.log(basket_clear1(1));
 console.log(basket_clear());
 console.log(basket_total)

@@ -1,18 +1,27 @@
+// Определяем базовое число
+var currentNumber = 2;
+
+//Продолжаем функцию c циклом до тех пор пока количество требуемых для отображения чисел не достигнет нуля 
 function simple_number(n) {
-    result=[];
-    for (let i = 1; i <= n; i++) {
-        for (let j = 2; j <= i; j++) {
-            if (i % j === 0 && j < i) {
-                // console.log(i, 'И все таки оно делится!');
-                break;
-            } else if (j === i) {
-                result = result + i + ' ';
-                // console.log(i);
-            } 
+    while(n != 0) {
+        if(isNatural(currentNumber)) {
+            console.log(currentNumber);
+            n--;  
         } 
+        currentNumber++;
     }
-    return result;
- }
+}
+
+
+// Определяем функцию которая проверяет натурайное ли число или нет
+function isNatural(number) {
+    for (var i = 2; i <= number/2; i++) {
+        if (number % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
 
 console.time();
 console.log(simple_number(process.argv[2]));
