@@ -1,5 +1,5 @@
-const goods = {
-    1: {
+const goods = [
+    {
         id: 1,
         name: 'Рубашка',
         description: '',
@@ -9,7 +9,7 @@ const goods = {
         price: 1500,
         available: 'available',
     },
-    2: {
+    {
         id: 2,
         name: 'Брюки',
         description: '',
@@ -19,7 +19,7 @@ const goods = {
         price: 2500,
         available: 'available',
     },
-    3: {
+    {
         id: 3,
         name: 'Джинсы',
         description: '',
@@ -29,7 +29,7 @@ const goods = {
         price: 5500,
         available: 'available',
     },
-    4: {
+    {
         id: 4,
         name: 'Джемпер',
         description: '',
@@ -39,7 +39,7 @@ const goods = {
         price: 3600,
         available: 'not_available',
     },
-    5: {
+    {
         id: 5,
         name: 'Халат',
         description: '',
@@ -49,19 +49,15 @@ const goods = {
         price: 1200,
         available: 'available',
     },
-};
-
-// const goodIndex = [goods[1], goods[2]];
-
-// goods[id]
+];
 
 const basket = [
     {
-        goodId: 2,
+        good: 2,
         amount: 3,
     },
     {
-        goodId: 5,
+        good: 3,
         amount: 2,
     },
 ];
@@ -80,26 +76,37 @@ function basket_add (a, b) {
 }
 
 //Удаление одной позиции из корзины
-function basket_clear1(n) {
-    basket.splice(n);
+function basket_clear1() {
+    basket.pop();
     return basket;
 }
 
+function summ() {
+    let totalSumm = 0;
+  
+    for (let i = 0; i < basket.length; i++) {
+      for (let n = 0; n < goods.length; n++) {
+        if (basket[i].good == goods[n].id) {
+          var mySum = basket[i].amount * goods[n].price;
+          totalSumm += mySum;
+        }
+      }
+    }
+    return totalSumm;
+  }
+  
+
 const basket_total = [
 {
-    totalAmount: basket[0].amount + basket[1].amount, //Общее количество товаров в корзине
-    totalSumm: goods[basket[0].goodId].price * basket[0].amount + goods[basket[1].goodId].price * basket[1].amount, //Общая стоимость товаров в корзине
+    totalAmount: basket.map(item => item.amount).reduce((prev, curr) => prev + curr), //Общее количество товаров в корзине
+    
+    totalSumm: summ(), //Общая стоимость товаров в корзине
 },
-]
-
-const basket_sum = goods[basket[0].goodId].price * basket[0].amount + goods[basket[1].goodId].price * basket[1].amount
+];
 
 
 console.log(basket);
-// console.log(basket_sum);
-
-
-console.log(basket_add(5, 4));
-console.log(basket_clear1(1));
-console.log(basket_clear());
-console.log(basket_total)
+console.log('Добавление позиции, корзина стала:',basket_add(3, 4));
+console.log('Удаление одной позиции:', basket_clear1(1));
+console.log('Общее количество и стоимость товаров в корзине:', basket_total);
+console.log('Корзина полностью очищена', basket_clear());

@@ -1,11 +1,12 @@
 // Определяем базовое число
 var currentNumber = 2;
+var results = [];
 
 //Продолжаем функцию c циклом до тех пор пока количество требуемых для отображения чисел не достигнет нуля 
 function simple_number(n) {
     while(n != 0) {
         if(isNatural(currentNumber)) {
-            console.log(currentNumber);
+            results.push(currentNumber);
             n--;  
         } 
         currentNumber++;
@@ -25,4 +26,5 @@ function isNatural(number) {
 
 console.time();
 console.log(simple_number(process.argv[2]));
+console.log(results);
 console.timeEnd();
