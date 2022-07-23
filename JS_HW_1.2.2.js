@@ -53,12 +53,12 @@ const goods = [
 
 const basket = [
     {
-        good: 2,
-        amount: 3,
+        good: 1,
+        amount: 7,
     },
     {
-        good: 3,
-        amount: 2,
+        good: 2,
+        amount: 5,
     },
 ];
 
@@ -70,17 +70,42 @@ function basket_clear() {
 }
 
 //Добавление товара в корзину
-function basket_add (a, b) {
-    basket.push({'goodId': a, 'amount': b});
-    return basket;
-}
+function addGood(goodId, amount) {
+    marker = 0;
+    for (let i of goods) {
+      if (i.id == goodId) {
+        for (let n = 0; n < basket.length; n++) {
+          if (goodId == basket[n].good) {
+            marker = 1;
+            basket[n].amount += amount;
+          }
+        }
+  
+        if (marker == 0) {
+          marker = 2;
+          var newObj = {
+            good: goodId,
+            amount: amount,
+          };
+          basket.push(newObj);
+  
+          console.log(`Добавлена позиция: ${i.name},`, `Количество: ${amount}`);
+        }
+      }
+    }
+  }
+
 
 //Удаление одной позиции из корзины
-function basket_clear1() {
-    basket.pop();
-    return basket;
+function basket_clear1(goodId) {
+    let i = basket.findIndex((good) => good.good == goodId);
+        if(i >= 0) {
+            basket.splice(i,1);
+            }
+            console.log('Заданная позиция', goodId,'удалена, корзина стала:', basket)
 }
 
+//Подсчет суммы стоимости товаров в корзине
 function summ() {
     let totalSumm = 0;
   
@@ -105,8 +130,8 @@ const basket_total = [
 ];
 
 
-console.log(basket);
-console.log('Добавление позиции, корзина стала:',basket_add(3, 4));
-console.log('Удаление одной позиции:', basket_clear1(1));
+// console.log(basket);
+addGood(3, 4);
+basket_clear1(3);
 console.log('Общее количество и стоимость товаров в корзине:', basket_total);
 console.log('Корзина полностью очищена', basket_clear());
